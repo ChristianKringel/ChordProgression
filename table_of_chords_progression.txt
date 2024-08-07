@@ -1,0 +1,128 @@
+Acordes Maiores
+Dó maior (C): formado por Dó (C), Mi (E) e Sol (G)
+Dó# maior (C#): formado por Dó# (C#), Fá (F) e Sol# (G#)
+Ré maior (D): formado por Ré (D), Fá# (F#) e Lá (A)
+Ré# maior (D#): formado por Ré# (D#), Sol (G) e Lá# (A#)
+Mi maior (E): formado por Mi (E), Sol# (G#) e Si (B)
+Fá maior (F): formado por Fá (F), Lá (A) e Dó (C)
+Fá# maior (F#): formado por Fá# (F#), Lá# (A#) e Dó# (C#)
+Sol maior (G): formado por Sol (G), Si (B) e Ré (D)
+Sol# maior (G#): formado por Sol# (G#), Dó (C) e Ré# (D#)
+Lá maior (A): formado por Lá (A), Dó# (C#) e Mi (E)
+Lá# maior (A#): formado por Lá# (A#), Ré (D) e Fá (F)
+Si maior (B): formado por Si (B), Ré# (D#) e Fá# (F#)
+
+Acordes Menores
+Dó menor (Cm): formado por Dó (C), Mi♭ (E♭) e Sol (G)
+Dó# menor (C#m): formado por Dó# (C#), Mi (E) e Sol# (G#)
+Ré menor (Dm): formado por Ré (D), Fá (F) e Lá (A)
+Ré# menor (D#m): formado por Ré# (D#), Fá# (F#) e Lá# (A#)
+Mi menor (Em): formado por Mi (E), Sol (G) e Si (B)
+Fá menor (Fm): formado por Fá (F), Lá♭ (A♭) e Dó (C)
+Fá# menor (F#m): formado por Fá# (F#), Lá (A) e Dó# (C#)
+Sol menor (Gm): formado por Sol (G), Si♭ (B♭) e Ré (D)
+Sol# menor (G#m): formado por Sol# (G#), Si (B) e Ré# (D#)
+Lá menor (Am): formado por Lá (A), Dó (C) e Mi (E)
+Lá# menor (A#m): formado por Lá# (A#), Dó# (C#) e Fá (F)
+Si menor (Bm): formado por Si (B), Ré (D) e Fá# (F#)
+
+Acordes Diminutos
+Dó diminuto (Cdim): formado por Dó (C), Mi♭ (E♭) e Sol♭ (G♭)
+Dó# diminuto (C#dim): formado por Dó# (C#), Mi (E) e Sol (G)
+Ré diminuto (Ddim): formado por Ré (D), Fá (F) e Lá♭ (A♭)
+Ré# diminuto (D#dim): formado por Ré# (D#), Fá# (F#) e Lá (A)
+Mi diminuto (Edim): formado por Mi (E), Sol (G) e Si♭ (B♭)
+Fá diminuto (Fdim): formado por Fá (F), Lá♭ (A♭) e Dó♭ (C♭)
+Fá# diminuto (F#dim): formado por Fá# (F#), Lá (A) e Dó (C)
+Sol diminuto (Gdim): formado por Sol (G), Si♭ (B♭) e Ré♭ (D♭)
+Sol# diminuto (G#dim): formado por Sol# (G#), Si (B) e Ré (D)
+Lá diminuto (Adim): formado por Lá (A), Dó (C) e Mi♭ (E♭)
+Lá# diminuto (A#dim): formado por Lá# (A#), Dó# (C#) e Mi (E)
+Si diminuto (Bdim): formado por Si (B), Ré (D) e Fá (F)
+
+
+Acordes Maiores_notação
+C: C, E, G
+C#: C#, F, G#
+D: D, F#, A
+D#: D#, G, A#
+E: E, G#, B
+F: F, A, C
+F#: F#, A#, C#
+G: G, B, D
+G#: G#, C, D#
+A: A, C#, E
+A#: A#, D, F
+B: B, D#, F#
+
+Acordes Menores_notação
+Cm: C, E♭, G
+C#m: C#, E, G#
+Dm: D, F, A
+D#m: D#, F#, A#
+Em: E, G, B
+Fm: F, A♭, C
+F#m: F#, A, C#
+Gm: G, B♭, D
+G#m: G#, B, D#
+Am: A, C, E
+A#m: A#, C#, F
+Bm: B, D, F#
+
+Acordes Diminutos_notação
+Cdim: C, E♭, G♭
+C#dim: C#, E, G
+Ddim: D, F, A♭
+D#dim: D#, F#, A
+Edim: E, G, B♭
+Fdim: F, A♭, C♭
+F#dim: F#, A, C
+Gdim: G, B♭, D♭
+G#dim: G#, B, D
+Adim: A, C, E♭
+A#dim: A#, C#, E
+Bdim: B, D, F
+##################################################
+
+Progressões de Acordes
+Acordes Maiores
+C: C, Dm, Em, F, G, Am, Bdim
+C#: C#, D#m, E#m, F#, G#, A#m, Cdim
+D: D, Em, F#m, G, A, Bm, C#dim
+D#: D#, Fm, Gm, G#, A#, Cm, Ddim
+E: E, F#m, G#m, A, B, C#m, D#dim
+F: F, Gm, Am, A#, C, Dm, Edim
+F#: F#, G#m, A#m, B, C#, D#m, Fdim
+G: G, Am, Bm, C, D, Em, F#dim
+G#: G#, A#m, Cm, C#, D#, Fm, Gdim
+A: A, Bm, C#m, D, E, F#m, G#dim
+A#: A#, Cm, Dm, D#, F, Gm, Adim
+B: B, C#m, D#m, E, F#, G#m, A#dim
+
+Acordes Menores
+Cm: Cm, Ddim, D#, Fm, Gm, G#, Bdim
+C#m: C#m, D#dim, E, F#m, G#m, A, Cdim
+Dm: Dm, Edim, F, Gm, Am, A#, C#dim
+D#m: D#m, Fdim, F#, G#m, A#m, B, Ddim
+Em: Em, F#dim, G, Am, Bm, C, D#dim
+Fm: Fm, Gdim, G#, A#m, Cm, C#, Edim
+F#m: F#m, G#dim, A, Bm, C#m, D, Fdim
+Gm: Gm, Adim, A#, Cm, Dm, D#, F#dim
+G#m: G#m, A#dim, B, C#m, D#m, E, Gdim
+Am: Am, Bdim, C, Dm, Em, F, G#dim
+A#m: A#m, Cdim, D#, Fm, Gm, G#, Adim
+Bm: Bm, C#dim, D, Em, F#m, G, A#dim
+
+Acordes Diminutos
+Cdim: Cdim, C, E♭, G♭
+C#dim: C#dim, C#, E, G
+Ddim: Ddim, D, F, A♭
+D#dim: D#dim, D#, F#, A
+Edim: Edim, E, G, B♭
+Fdim: Fdim, F, A♭, C♭
+F#dim: F#dim, F#, A, C
+Gdim: Gdim, G, B♭, D♭
+G#dim: G#dim, G#, B, D
+Adim: Adim, A, C, E♭
+A#dim: A#dim, A#, C#, E
+Bdim: Bdim, B, D, F
