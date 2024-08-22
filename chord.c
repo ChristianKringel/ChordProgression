@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 10              // Número máximo de acordes que um nó pode ter como filhos
+#define N 12            // Número máximo de acordes que um nó pode ter como filhos
 #define MAX_ACORDE_LEN 10 // Comprimento máximo do acorde, por exemplo, "C#m" ---- Arrumar posteriormente
 
 typedef struct TrieNode
@@ -35,12 +35,12 @@ void insert(TrieNode *root, const char *acorde)
         if (node->children[i] == NULL)
         {
             node->children[i] = create_node(acorde);
-            printf("Inserido '%s' no indice %d\n", acorde, i);
+            //printf("Inserido '%s' no indice %d\n", acorde, i);
             return;
         }
         else if (strcmp(node->children[i]->acorde, acorde) == 0)
         {
-            printf("Acorde '%s' ja existe\n", acorde);
+           // printf("Acorde '%s' ja existe\n", acorde);
             return;
         }
     }
@@ -84,12 +84,12 @@ void insert_scale(TrieNode *root, const char *scale_root, const char *scale[], i
             if (node->children[j] == NULL)
             {
                 node->children[j] = child;
-                printf("Inserido '%s' no indice %d\n", scale[i], j);
+               // printf("Inserido '%s' no indice %d\n", scale[i], j);
                 break;
             }
             else if (strcmp(node->children[j]->acorde, scale[i]) == 0)
             {
-                printf("Acorde '%s' ja existe\n", scale[i]);
+               // printf("Acorde '%s' ja existe\n", scale[i]);
                 break;
             }
         }
@@ -125,12 +125,85 @@ void print_trie(TrieNode *root, int level)
         }
     }
 }
+int teste(TrieNode* root, char *chord)
+{
+    if (root == NULL) {
+        return 0;  // se for null retorna  0 (esta vazio)
+    }
+    
+    // compara pra ver se eh o acorde passado por parametro
+    if (strcmp(root->acorde, chord) == 0) {
+        return 1;
+    }
 
+    // Busca recursivamente em todos os filhos
+    for (int i = 0; i < N; i++) {
+        if (root->children[i] && teste(root->children[i], chord)) {
+            return 1;
+        }
+    }
+    
+    return 0;
+}
+
+char *searchForScale(TrieNode* root, char *chord)
+{
+    if (root == NULL) {
+        //return "Nada";  // se root for null
+        return;
+    }
+    
+    // olha o acorde da raiz
+    if (strcmp(root->acorde, chord) == 0) {
+        return root->acorde;
+    }
+
+    // Busca recursivamente em todos os filhos
+    for (int i = 0; i < N; i++) {
+        if (root->children[i] && teste(root->children[i], chord)) {
+            //return root->children[i]->acorde;
+            printf("%s\n",  root->children[i]->acorde);
+        }
+    }
+    
+    //return "Nada";  // Retorna nada se o acorde n for encontrado
+    return;
+}
+
+void possibleScales(TrieNode* root, char *chord)
+{
+    if(root == NULL)
+        return; 
+        //return " ";
+    
+    if(strcmp(root->acorde, chord) == 0)
+        printScale(root);
+    
+    for(int i = 0; i < N; i++)
+    {
+        if(root->children[i] && teste(root->children[i], chord))
+        {
+            printScale(root->children[i]);
+        }
+    }
+}
+
+void printScale(TrieNode* root)
+{
+    printf("  |--%s\n", root->acorde);
+    for(int i = 0; i < N; i++)
+    {
+        printf("%s\n", root->children[i]->acorde);
+    }
+}
 
 int main()
 {
     TrieNode *root = create_node(""); // Raiz vazia
 
+
+    // ==============================
+    // arrumar insercao da escala de A# e B
     // Setando escalas
     const char *C_scale[] = {"C", "Dm", "Em", "F", "G", "Am", "Bdim"};
     const char *Csharp_scale[] = {"C#", "D#m", "E#m", "F#", "G#", "A#m", "Cdim"};
@@ -161,10 +234,14 @@ int main()
     insert_scale(root, "B", B_scale, 7);
 
     
-    printf("Estrutura da Trie:\n");
-    print_trie(root, 0);
+   // printf("Estrutura da Trie:\n");
+   print_trie(root, 0);
 
     printf("\n");
+    printf("Buscando o acorde\n");
+    char *search = searchForScale(root, "A#dim");
+    //printf("%s", search);
+    //possibleScales(root, "Em");
     //printf("Buscando acordes:\n");
     //wich_scale(root, "Edim"); 
     /* ######################### ######################### ######################### #########################*/
