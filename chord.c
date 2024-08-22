@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 10              // Número máximo de acordes que um nó pode ter como filhos (ajuste conforme necessário)
-#define MAX_ACORDE_LEN 10 // Comprimento máximo do acorde, por exemplo, "C#m"
+#define N 10              // Número máximo de acordes que um nó pode ter como filhos
+#define MAX_ACORDE_LEN 10 // Comprimento máximo do acorde, por exemplo, "C#m" ---- Arrumar posteriormente
 
 typedef struct TrieNode
 {
@@ -12,6 +12,7 @@ typedef struct TrieNode
     int is_leaf;
 } TrieNode;
 
+// criacao do no 
 TrieNode *create_node(const char *acorde)
 {
     TrieNode *node = (TrieNode *)malloc(sizeof(TrieNode));
@@ -25,6 +26,7 @@ TrieNode *create_node(const char *acorde)
     return node;
 }
 
+// insercao na arvore
 void insert(TrieNode *root, const char *acorde)
 {
     TrieNode *node = root;
@@ -44,6 +46,7 @@ void insert(TrieNode *root, const char *acorde)
     }
 }
 
+// insercao dos acordes das escalas
 void insert_scale(TrieNode *root, const char *scale_root, const char *scale[], int size)
 {
     TrieNode *node = root;
@@ -93,6 +96,7 @@ void insert_scale(TrieNode *root, const char *scale_root, const char *scale[], i
     }
 }
 
+// prints
 void print_trie(TrieNode *root, int level)
 {
     if (root == NULL)
@@ -140,6 +144,7 @@ int main()
     const char *A_scale[] = {"A", "Bm", "C#m", "D", "E", "F#m", "G#dim"};
     const char *Asharp_scale[] = {"A#", "Cm", "Dm", "D#", "F", "Gm", "Adim"};
     const char *B_scale[] = {"B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"};
+    // --------------- setar mais escalas ---------------
 
     // Inserindo as escalas na trie
     insert_scale(root, "C", C_scale, 7);
@@ -155,13 +160,15 @@ int main()
     insert_scale(root, "A#", Asharp_scale, 7);
     insert_scale(root, "B", B_scale, 7);
 
-    // Imprimir a estrutura da Trie
+    
     printf("Estrutura da Trie:\n");
     print_trie(root, 0);
 
     printf("\n");
     //printf("Buscando acordes:\n");
-    //wich_scale(root, "Edim");
+    //wich_scale(root, "Edim"); 
+    /* ######################### ######################### ######################### #########################*/
+    // ######################### FAZER CODIGO DE RETORNO DA ESCALA #########################
 
     return 0;
 }
