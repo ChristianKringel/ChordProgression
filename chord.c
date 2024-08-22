@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 12            // Número máximo de acordes que um nó pode ter como filhos
+#define N 24              // Número máximo de acordes que um nó pode ter como filhos
 #define MAX_ACORDE_LEN 10 // Comprimento máximo do acorde, por exemplo, "C#m" ---- Arrumar posteriormente
 
 typedef struct TrieNode
@@ -12,7 +12,7 @@ typedef struct TrieNode
     int is_leaf;
 } TrieNode;
 
-// criacao do no 
+// criacao do no
 TrieNode *create_node(const char *acorde)
 {
     TrieNode *node = (TrieNode *)malloc(sizeof(TrieNode));
@@ -35,12 +35,12 @@ void insert(TrieNode *root, const char *acorde)
         if (node->children[i] == NULL)
         {
             node->children[i] = create_node(acorde);
-            //printf("Inserido '%s' no indice %d\n", acorde, i);
+            // printf("Inserido '%s' no indice %d\n", acorde, i);
             return;
         }
         else if (strcmp(node->children[i]->acorde, acorde) == 0)
         {
-           // printf("Acorde '%s' ja existe\n", acorde);
+            // printf("Acorde '%s' ja existe\n", acorde);
             return;
         }
     }
@@ -84,12 +84,12 @@ void insert_scale(TrieNode *root, const char *scale_root, const char *scale[], i
             if (node->children[j] == NULL)
             {
                 node->children[j] = child;
-               // printf("Inserido '%s' no indice %d\n", scale[i], j);
+                // printf("Inserido '%s' no indice %d\n", scale[i], j);
                 break;
             }
             else if (strcmp(node->children[j]->acorde, scale[i]) == 0)
             {
-               // printf("Acorde '%s' ja existe\n", scale[i]);
+                // printf("Acorde '%s' ja existe\n", scale[i]);
                 break;
             }
         }
@@ -125,82 +125,129 @@ void print_trie(TrieNode *root, int level)
         }
     }
 }
-int teste(TrieNode* root, char *chord)
+int teste(TrieNode *root, char *chord)
 {
-    if (root == NULL) {
-        return 0;  // se for null retorna  0 (esta vazio)
+    if (root == NULL)
+    {
+        return 0; // se for null retorna  0 (esta vazio)
     }
-    
+
     // compara pra ver se eh o acorde passado por parametro
-    if (strcmp(root->acorde, chord) == 0) {
+    if (strcmp(root->acorde, chord) == 0)
+    {
         return 1;
     }
 
     // Busca recursivamente em todos os filhos
-    for (int i = 0; i < N; i++) {
-        if (root->children[i] && teste(root->children[i], chord)) {
+    for (int i = 0; i < N; i++)
+    {
+        if (root->children[i] && teste(root->children[i], chord))
+        {
             return 1;
         }
     }
-    
+
     return 0;
 }
 
-char *searchForScale(TrieNode* root, char *chord)
+char *searchForScale(TrieNode *root, char *chord)
 {
-    if (root == NULL) {
-        //return "Nada";  // se root for null
+    if (root == NULL)
+    {
+        // return "Nada";  // se root for null
         return;
     }
-    
+
     // olha o acorde da raiz
-    if (strcmp(root->acorde, chord) == 0) {
+    if (strcmp(root->acorde, chord) == 0)
+    {
         return root->acorde;
     }
 
     // Busca recursivamente em todos os filhos
-    for (int i = 0; i < N; i++) {
-        if (root->children[i] && teste(root->children[i], chord)) {
-            //return root->children[i]->acorde;
-            printf("%s\n",  root->children[i]->acorde);
+    for (int i = 0; i < N; i++)
+    {
+        if (root->children[i] && teste(root->children[i], chord))
+        {
+            // return root->children[i]->acorde;
+            printf("%s\n", root->children[i]->acorde);
         }
     }
-    
-    //return "Nada";  // Retorna nada se o acorde n for encontrado
+
+    // return "Nada";  // Retorna nada se o acorde n for encontrado
     return;
 }
 
-void possibleScales(TrieNode* root, char *chord)
+void possibleScales(TrieNode *root, char *chord)
 {
-    if(root == NULL)
-        return; 
-        //return " ";
-    
-    if(strcmp(root->acorde, chord) == 0)
+    if (root == NULL)
+        return;
+    // return " ";
+
+    if (strcmp(root->acorde, chord) == 0)
         printScale(root);
-    
-    for(int i = 0; i < N; i++)
+
+    for (int i = 0; i < N; i++)
     {
-        if(root->children[i] && teste(root->children[i], chord))
+        if (root->children[i] && teste(root->children[i], chord))
         {
             printScale(root->children[i]);
         }
     }
 }
 
-void printScale(TrieNode* root)
+void printScale(TrieNode *root)
 {
-    printf("  |--%s\n", root->acorde);
-    for(int i = 0; i < N; i++)
+    //if(strcmp(root->acorde, "m"))
+    printf("\n  |--%s\n", root->acorde);
+    for (int i = 0; i < N; i++)
     {
         printf("%s\n", root->children[i]->acorde);
     }
 }
 
+void print_trie_dot(TrieNode *root, FILE *file, int *node_count)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    if (strlen(root->acorde) > 0)
+    {
+        fprintf(file, "  node%d [label=\"%s\"];\n", (*node_count)++, root->acorde);
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        if (root->children[i] != NULL)
+        {
+            fprintf(file, "  node%d -> node%d;\n", *node_count - 1, *node_count);
+            print_trie_dot(root->children[i], file, node_count);
+        }
+    }
+}
+
+// Gera o arquivo DOT
+void generate_dot_file(TrieNode *root, const char *filename)
+{
+    FILE *file = fopen(filename, "w");
+    if (file == NULL)
+    {
+        fprintf(stderr, "Erro ao abrir arquivo %s\n", filename);
+        return;
+    }
+
+    fprintf(file, "digraph Trie {\n");
+    int node_count = 0;
+    print_trie_dot(root, file, &node_count);
+    fprintf(file, "}\n");
+    fclose(file);
+}
+
 int main()
 {
     TrieNode *root = create_node(""); // Raiz vazia
-
 
     // ==============================
     // arrumar insercao da escala de A# e B
@@ -233,19 +280,63 @@ int main()
     insert_scale(root, "A#", Asharp_scale, 7);
     insert_scale(root, "B", B_scale, 7);
 
+    // --------------- escalas menores naturais ---------------
+
+    const char *Cm_scale[] = {"Cm", "Ddim", "Eb", "Fm", "Gm", "G#", "Bb"};
+    const char *Csharpm_scale[] = {"C#m", "D#dim", "E", "F#m", "G#m", "A", "B"};
+    const char *Dm_scale[] = {"Dm", "Edim", "F", "Gm", "Am", "Bb", "C"};
+    const char *Dsharpm_scale[] = {"D#m", "E#dim", "F#", "G#m", "A#m", "B", "C#"};
+    const char *Em_scale[] = {"Em", "F#dim", "G", "Am", "Bm", "C", "D"};
+    const char *Fm_scale[] = {"Fm", "Gdim", "Ab", "Bbm", "Cm", "Db", "Eb"};
+    const char *Fsharpm_scale[] = {"F#m", "G#dim", "A", "Bm", "C#m", "D", "E"};
+    const char *Gm_scale[] = {"Gm", "Adim", "Bb", "Cm", "Dm", "Eb", "F"};
+    const char *Gsharpm_scale[] = {"G#m", "A#dim", "B", "C#m", "D#m", "E", "F#"};
+    const char *Am_scale[] = {"Am", "Bdim", "C", "Dm", "Em", "F", "G"};
+    const char *Asharpm_scale[] = {"A#m", "B#dim", "C#", "D#m", "E#m", "F#", "G#"};
+    const char *Bm_scale[] = {"Bm", "C#dim", "D", "Em", "F#m", "G", "A"};
+
+    // Inserindo as escalas menores naturais na trie
+    insert_scale(root, "Cm", Cm_scale, 7);
+    insert_scale(root, "C#m", Csharpm_scale, 7);
+    insert_scale(root, "Dm", Dm_scale, 7);
+    insert_scale(root, "D#m", Dsharpm_scale, 7);
+    insert_scale(root, "Em", Em_scale, 7);
+    insert_scale(root, "Fm", Fm_scale, 7);
+    insert_scale(root, "F#m", Fsharpm_scale, 7);
+    insert_scale(root, "Gm", Gm_scale, 7);
+    insert_scale(root, "G#m", Gsharpm_scale, 7);
+    insert_scale(root, "Am", Am_scale, 7);
+    insert_scale(root, "A#m", Asharpm_scale, 7);
+    insert_scale(root, "Bm", Bm_scale, 7);
+
+    char *chord;
+    //printf("Estrutura da Trie:\n");
+    int option = 0;
+    //print_trie(root, 0);
     
-   // printf("Estrutura da Trie:\n");
-   print_trie(root, 0);
-
+    //generate_dot_file(root, "trie.dot");
+    printf("\n\t ----- Bem vindo ao aplicativo de acordes e escalas ----- \n");
     printf("\n");
-    printf("Buscando o acorde\n");
-    char *search = searchForScale(root, "A#dim");
-    //printf("%s", search);
-    //possibleScales(root, "Em");
-    //printf("Buscando acordes:\n");
-    //wich_scale(root, "Edim"); 
-    /* ######################### ######################### ######################### #########################*/
-    // ######################### FAZER CODIGO DE RETORNO DA ESCALA #########################
+    printf("1- Imprimir escalas possiveis com o acorde digitado\n2- Imprimir acordes possiveis com base no acorde atual\n");
+    printf("Digite a opcao desejada: ");
+    scanf("%d", &option);
+    printf("Qual acorde voce deseja buscar?\n");
+    scanf("%s", chord);
+    printf("Buscando o acorde: %s\n", chord);
 
+    if (option == 1)
+    {
+        printf("As escalas possiveis com o acorde %s sao: \n", chord);
+        searchForScale(root, chord);
+    }
+
+    else if (option == 2)
+    {
+        printf("Os acordes possiveis com base no acorde %s sao: \n", chord);
+        possibleScales(root, chord);
+    }
+    else
+        printf("Opcao invalida\n");
+    
     return 0;
 }
